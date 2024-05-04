@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OneOfAKindSupreme.Frontend.Infrastructure\OneOfAKindSupreme.Frontend.Infrastructure.csproj" />
+    <ProjectReference Include="..\OneOfAKindSupreme.Frontend.UseCases\OneOfAKindSupreme.Frontend.UseCases.csproj" />
+  </ItemGroup>
+
 </Project>

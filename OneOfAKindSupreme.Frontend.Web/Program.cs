@@ -1,7 +1,11 @@
+using OneOfAKindSupreme.Frontend.Infrastructure.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.RegisterInfrastructureServices();
 
 var app = builder.Build();
 

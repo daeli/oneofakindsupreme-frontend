@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OneOfAKindSupreme.Frontend.Core\OneOfAKindSupreme.Frontend.Core.csproj" />
+    <ProjectReference Include="..\OneOfAKindSupreme.Frontend.Infrastructure\OneOfAKindSupreme.Frontend.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
