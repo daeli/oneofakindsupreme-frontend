@@ -1,4 +1,5 @@
 using OneOfAKindSupreme.Frontend.Infrastructure.Configuration;
+using OneOfAKindSupreme.Frontend.UseCases.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.RegisterInfrastructureServices();
+builder.Services.RegisterUseCaseServices();
 
 var app = builder.Build();
 

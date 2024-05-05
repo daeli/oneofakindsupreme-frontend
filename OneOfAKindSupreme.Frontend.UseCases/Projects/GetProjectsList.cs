@@ -7,7 +7,7 @@ using OneOfAKindSupreme.Frontend.Core.Interfaces;
 using OneOfAKindSupreme.Frontend.Core.ViewModels;
 namespace OneOfAKindSupreme.Frontend.UseCases.Projects
 {
-    public class GetProjectsList
+    public class GetProjectsList : IGetProjectsList
     {
         private readonly IProjectsApi api;
         public GetProjectsList(IProjectsApi api) 

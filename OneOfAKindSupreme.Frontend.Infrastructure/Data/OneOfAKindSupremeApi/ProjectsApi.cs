@@ -1,13 +1,7 @@
-﻿using Newtonsoft.Json;
-using OneOfAKindSupreme.Frontend.Core.Interfaces;
+﻿using OneOfAKindSupreme.Frontend.Core.Interfaces;
 using OneOfAKindSupreme.Frontend.Core.ViewModels;
 using OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi.Responses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using OneOfAKindSupreme.Frontend.Infrastructure.Transforms;
 
 namespace OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi
 {
@@ -19,10 +13,9 @@ namespace OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi
         {
             List<ProjectViewModel> projects = new List<ProjectViewModel>();
             GetProjectsResponse response = await base.List<GetProjectsResponse>(Endpoint);
-            if (response != null)
-            {
-                //TODO:  Move the DTO transform
-                projects.AddRange(response.Projects.Select(x => new ProjectViewModel { Id = x.Id, Name = x.Name, Status = x.Status }));
+            if (response != null && response.Projects != null)
+            {                
+                projects.AddRange(response.Projects.ToProjectViewModels());
             }
             return projects;
         }

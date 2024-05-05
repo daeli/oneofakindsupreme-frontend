@@ -1,15 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi;
-using OneOfAKindSupreme.Frontend.UseCases.Projects;
+using OneOfAKindSupreme.Frontend.Core.Interfaces;
 
 namespace OneOfAKindSupreme.Frontend.Web.Controllers
 {
     public class ProjectsController : Controller
     {
+        private IGetProjectsList getProjectsList;
+        public ProjectsController(IGetProjectsList getProjectsList) 
+        { 
+            this.getProjectsList = getProjectsList; 
+        }
+
         public async Task<IActionResult> Index()
         {
-            //TODO:  Register this dependency and get from container.
-            var list = await new GetProjectsList(new ProjectsApi()).GetList();
+          
+            var list = await getProjectsList.GetList();
 
             return View();
         }
