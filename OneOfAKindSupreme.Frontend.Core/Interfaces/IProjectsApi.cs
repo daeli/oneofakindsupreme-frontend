@@ -5,6 +5,6 @@ namespace OneOfAKindSupreme.Frontend.Core.Interfaces
 {
     public interface IProjectsApi
     {
-        Task<IEnumerable<ProjectViewModel>> GetProjectsList();
+        Task<List<ProjectViewModel>> GetProjectsList();
     }
 }

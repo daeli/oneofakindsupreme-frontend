@@ -4,6 +4,6 @@ namespace OneOfAKindSupreme.Frontend.Core.Interfaces
 {
     public interface IGetProjectsList
     {
-        Task<IEnumerable<ProjectViewModel>> GetList();
+        Task<List<ProjectViewModel>> GetList();
     }
 }

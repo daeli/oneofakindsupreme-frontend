@@ -15,7 +15,7 @@ namespace OneOfAKindSupreme.Frontend.UseCases.Projects
             this.api = api; 
         }
 
-        public async Task<IEnumerable<ProjectViewModel>> GetList() 
+        public async Task<List<ProjectViewModel>> GetList() 
         {
             var result = await api.GetProjectsList();
 

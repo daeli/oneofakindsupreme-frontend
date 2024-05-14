@@ -15,6 +15,7 @@ namespace OneOfAKindSupreme.Frontend.Web.Controllers
         {
           
             var list = await getProjectsList.GetList();
+            ViewData["projects"] = list;
 
             return View();
         }

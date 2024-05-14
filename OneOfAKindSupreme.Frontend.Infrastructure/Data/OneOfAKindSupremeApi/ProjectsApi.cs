@@ -9,7 +9,7 @@ namespace OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi
     {
         public const string Endpoint ="/projects";
 
-        public async Task<IEnumerable<ProjectViewModel>> GetProjectsList()
+        public async Task<List<ProjectViewModel>> GetProjectsList()
         {
             List<ProjectViewModel> projects = new List<ProjectViewModel>();
             GetProjectsResponse response = await base.List<GetProjectsResponse>(Endpoint);
