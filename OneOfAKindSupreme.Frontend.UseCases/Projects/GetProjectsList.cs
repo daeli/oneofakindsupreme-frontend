@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OneOfAKindSupreme.Frontend.Core.Interfaces;
+using OneOfAKindSupreme.Frontend.Core.Interfaces.Api;
+using OneOfAKindSupreme.Frontend.Core.Interfaces.Domain;
 using OneOfAKindSupreme.Frontend.Core.ViewModels;
 namespace OneOfAKindSupreme.Frontend.UseCases.Projects
 {

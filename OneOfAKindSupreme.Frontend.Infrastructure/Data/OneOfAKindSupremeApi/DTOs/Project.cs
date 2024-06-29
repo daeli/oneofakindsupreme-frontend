@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using OneOfAKindSupreme.Frontend.Core.Interfaces.Api;
 
 namespace OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi.DTOs
 {
-    public class Project
+    public class Project : IApiDto
     {
-        public int Id { get; set; }
+        public string? Id { get; set; }
         public string? Name { get; set; }
         public string? Status { get; set; }
     }

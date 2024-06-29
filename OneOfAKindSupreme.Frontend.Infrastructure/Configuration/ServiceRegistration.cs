@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OneOfAKindSupreme.Frontend.Core.Interfaces;
+using OneOfAKindSupreme.Frontend.Core.Interfaces.Api;
 using OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi;
 
 namespace OneOfAKindSupreme.Frontend.Infrastructure.Configuration

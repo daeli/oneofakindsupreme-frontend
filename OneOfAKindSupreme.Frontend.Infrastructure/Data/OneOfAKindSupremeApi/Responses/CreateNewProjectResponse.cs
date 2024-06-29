@@ -3,10 +3,9 @@ using OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi.DTOs;
 
 namespace OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi.Responses
 {
-    [Serializable]
-    public class GetProjectsResponse
+    public class CreateNewProjectResponse
     {
         [JsonProperty("data")]
-        public IEnumerable<Project>? Projects { get; set; }
+        public Project? Project { get; set; }
     }
 }

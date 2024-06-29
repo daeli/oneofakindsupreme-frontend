@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OneOfAKindSupreme.Frontend.Core.Interfaces
+namespace OneOfAKindSupreme.Frontend.Core.Interfaces.Api
 {
-    public interface IApi
+    public interface IApiDto
     {
-        Task<T> List<T>(string endpoint);
     }
 }

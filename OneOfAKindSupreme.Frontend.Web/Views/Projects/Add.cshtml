@@ -9,7 +9,7 @@
     <div class="card-body">
         <form>
             <div class="form-floating mb-3">
-                <input class="form-control" id="inputProjectName" type="email" placeholder="" />
+                <input class="form-control" id="inputProjectName" name="projectName" type="text" placeholder="" />
                 <label for="inputProjectName">Project Name</label>
             </div>
             <div class="form-floating mb-3">
@@ -21,7 +21,8 @@
                 <label for="inputProjectStatus">Status</label>
             </div>
             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                <a class="btn btn-primary" href="index.html">Save</a>
+                <button class="btn btn-primary" asp-action="AddProject">Save</button>
+                
             </div>
         </form>
     </div>
