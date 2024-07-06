@@ -10,6 +10,7 @@ namespace OneOfAKindSupreme.Frontend.Infrastructure.Configuration
         {
             serviceCollection.AddScoped(typeof(IApi), typeof(Api));
             serviceCollection.AddScoped(typeof(IProjectsApi), typeof(ProjectsApi));
+            serviceCollection.AddScoped(typeof(IAuthenticationApi), typeof(AuthenticationApi));
 
             return serviceCollection;
         }

@@ -6,14 +6,16 @@ using OneOfAKindSupreme.Frontend.Infrastructure.Transforms;
 
 namespace OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi
 {
-    public class ProjectsApi : Api, IProjectsApi
+    public class ProjectsApi(IApi api) : IProjectsApi
     {
-        public const string Endpoint ="/projects";
+        public const string ProjectsEndpoint ="/projects";
+
+        private readonly IApi api = api;
 
         public async Task<List<ProjectViewModel>> GetProjectsList()
         {
             List<ProjectViewModel> projects = [];
-            GetProjectsResponse? response = await GetFromApiAsync<GetProjectsResponse>(Endpoint);
+            GetProjectsResponse? response = await api.GetFromApiAsync<GetProjectsResponse>(ProjectsEndpoint);
             if (response != null && response.Projects != null)
             {                
                 projects.AddRange(response.Projects.ToProjectViewModels());
@@ -23,7 +25,7 @@ namespace OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi
 
         public async Task<ProjectViewModel?> CreateNewProject(string projectName, string projectStatus) 
         {            
-            CreateNewProjectResponse? response = await PostToApiAsync<CreateNewProjectResponse>(Endpoint, new NewProject { Name = projectName, Status = projectStatus });
+            CreateNewProjectResponse? response = await api.PostToApiAsync<CreateNewProjectResponse>(ProjectsEndpoint, new NewProject { Name = projectName, Status = projectStatus });
             if (response != null && response.Project != null) 
             {
                 return response.Project.ToProjectViewModel();

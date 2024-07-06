@@ -1,4 +1,6 @@
+using OneOfAKindSupreme.Frontend.Core.Interfaces.Api;
 using OneOfAKindSupreme.Frontend.Infrastructure.Configuration;
+using OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi;
 using OneOfAKindSupreme.Frontend.UseCases.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.RegisterInfrastructureServices();
 builder.Services.RegisterUseCaseServices();
+builder.Services.AddHttpClient<IApi, Api>(client => {
+    var baseUrl = builder.Configuration.GetValue<string>("Api:BaseUrl") ?? "";
+    client.BaseAddress = new Uri(baseUrl);
+});
 
 var app = builder.Build();
 

@@ -7,29 +7,24 @@ namespace OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi
 {
     public class Api : IApi
     {
-        private readonly string token = "CfDJ8HP3uywBVL5Nl1AY_8PhcZSGtX-sw8uZlVDxII_kzZgtdl57HVCIoshQJCjYBiQvsXowul1rDnsm7xA5HtE3m8eJaKhBHHY9QIcN_6IargV10RxKPbc3Ku9fPWRVPg_8B0PRIuQnMJ4Bf47MluG47B1dk9NqJhXAoGdpSUrxzodDykhqQix2Pul6TyKEl2WyEHMYSFAujWsmITdjxysZoG_5nn2cFPH4NJiWXEI9i0jIxU8lWLQsKBKep59OKur4fmTSLqUSKWgBTTYSG2YBllZryLcX4o9hnRV4Sn-G8v5SiVLz8k0XFaeMXqoOcb6FQhXHnVqkVQfTw4R40oW8iULEv63kP8TnvYZ7v7qouuY2GAUcc3gWdO5k7uvZzzAYbyG2qiPHs24wcz2pWOJgdwrmoGeNARYvNLzeqjXQ6FD4qWWZyLe2Mn_tSqoQNDkq8HlEr6-YbExKDtc4VTRw6qq4CAxqOmeONOKbht3Bt5so-u-lRR71QI7Cg_huiNP6RxZuuvfiDCdxpvdLP2ycczvGN-ShoHlAMDZzukR9LHYGpOmeF5LZpHcMyhD9VI-dzoecIN-MXBqEYYXJ4JIyL1osMWAtuVsePjff8E1kN2TFGzd9GVXV-1X56pVkWIAIMBqh_IYOBngxZSFxM0A144m_MFdqRIcJvSTk1a5cJC7yNsBNElj8smfj-h76JOsI4g";
+        private readonly string token = "CfDJ8HP3uywBVL5Nl1AY_8PhcZSYR1mJnce0jbNpZCJQMUcnV802WcwurHtT_ThE8CPqo-8KGxQFtJzoa0V_6MnLWM0cKF4wnYUy41m5bhmWWbcETfMdnqgxaz5LLRtitZs_lHBFIUbRDCnP08Yz7nh2hLfOGTRcFztdAHIY9KFGoVgC1JPPMeR2OpGXncSXY3YMOr36xCU0IvpYf5gzZ2ATU6-OAoIZxbVmUGqRryvQHQib4vtNRL9kAaUjN5ZHPN3LqHMmNmyD3yJ-pJsibm-Gt15rNlR1SfaCCcf86UsaLhTytR2iV94NBC8iSr1Sg63doSombUi_bDpoif2zyOkAOcUS3Vo1ARhzM3QDYAZsVMhsFT0gL4mL7oOUWs7AYFvlaHA79UhCvcUZZX92eF3Q9OQ4Fb-t14i3u8xJDJGNFzhIMCV1OTfyk02aNjs0Yn7EFT0es3hf323Iip97BAmd7LJzLnagzPTUMHch1_-FQo06NjdrDdzZe9ISkDf5LuVH_Ab0_0eZORTRs8hZo3Cldrxfk1CAjXoBHZ_H7DEozclzSyMfBfG8_APdQoDwXiigpCVay6vqVgyaYjULwy2cvh29QzrXGWoY-sQbGkBVzyL8qMRB-a9FVzvV1mwylaUCy9ZLLKHUx_2P84eY-znuGf0dOdYfGVo9YsoeXC5SNKxCw07MH42vB3-z8yA4-mrhmg";
 
-        // TODO:  Get base url from configuraton.
-        public const string BaseUrl = "https://localhost:7230";
+        private readonly HttpClient httpClient;
 
-        private HttpClient GetClient(string endpoint) 
-        {
-            var url = BaseUrl;
-            HttpClient client = new HttpClient
-            {
-                BaseAddress = new Uri($"{url}{endpoint}")
-            };
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        private static readonly string contentType = "application/json";
 
-            return client;
+        private static readonly string authHeaderType = "Bearer";
+
+        public Api(HttpClient httpClient)
+        { 
+            this.httpClient = httpClient;
+            this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
+            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(authHeaderType, token);
         }
 
         public async Task<T?> GetFromApiAsync<T>(string endpoint) 
         {
-            var client = GetClient(endpoint);
-
-            HttpResponseMessage response = await client.GetAsync(endpoint).ConfigureAwait(false);
+            HttpResponseMessage response = await this.httpClient.GetAsync(endpoint).ConfigureAwait(false);
 
             if (response.IsSuccessStatusCode)
             {
@@ -42,11 +37,9 @@ namespace OneOfAKindSupreme.Frontend.Infrastructure.Data.OneOfAKindSupremeApi
 
         public async Task<T?> PostToApiAsync<T>(string endpoint, IApiDto data)
         {
-            var client = GetClient(endpoint);
-
             var jsonData = JsonConvert.SerializeObject(data);
-            var requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(endpoint, requestContent).ConfigureAwait(false);
+            var requestContent = new StringContent(jsonData, Encoding.UTF8, contentType);
+            HttpResponseMessage response = await this.httpClient.PostAsync(endpoint, requestContent).ConfigureAwait(false);
 
             if (response.IsSuccessStatusCode) 
             {
